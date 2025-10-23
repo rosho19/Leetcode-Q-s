@@ -8,15 +8,15 @@ class Solution:
         if not lists or len(lists) == 0: # base cases for null input list
             return None
         
-        while len(lists) > 1: # the length of the input lists will keep decreasing as the lists continue to get merged into fewer distinct lists
+        while len(lists) > 1: # the length of the input lists will keep decreasing as the lists continue to get merged 
             merged = [] # create temporary variable to store the results of the merge2lists helper function
 
             for i in range(0, len(lists), 2): # runs a for loop incremented by 2 to cover the 2 lists being merged each time
                 l1 = lists[i]
                 l2 = lists[i + 1] if (i + 1) < len(lists) else None # ensures that in the case the k lists is odd, i + 1 won't be out of bounds
-                merged.append(self.merge2lists(l1, l2)) # continously appends the result of the merged lists, where only the most recent result is the one that matters
-            lists = merged
-        return lists[0] # that's why we print the first value of lists
+                merged.append(self.merge2lists(l1, l2)) # continously appends the result of the two chosen lists, so at the end of the loop we have half of the lists we started with at the start of the loop
+            lists = merged # where len(lists) / 2 from the start of the for loop
+        return lists[0] # returns the only list left in the input list
     
 
     def merge2lists(self, list1, list2):
@@ -37,4 +37,3 @@ class Solution:
             tail.next = list2
             
         return dummynode.next # return the head value, which is the first node appended to our dummy node.
-        
